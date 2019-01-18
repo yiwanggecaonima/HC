@@ -17,8 +17,8 @@ class HcSpider(Spider):
     # start_urls = []
     # client = pymongo.MongoClient('localhost')
     # db = client['new_hc']
-    # pool = redis.ConnectionPool(host='47.107.137.63', port=6379, db=10,password='caonima')
-    r = redis.Redis(host='47.107.137.63', port=6379, db=10,password='caonima',decode_responses=True)
+    # pool = redis.ConnectionPool(host='', port=6379, db=10,password='')
+    r = redis.Redis(host='', port=6379, db=10,password='',decode_responses=True)
     print(r)
 
     # redis_key = 'j_urls'
