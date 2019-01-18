@@ -30,23 +30,17 @@ class ProcessAllExceptionMiddleware(object):
                       IOError, TunnelError)
 
     def process_response(self, request, response, spider):
-        # 捕获状态码为40x/50x的response
         if str(response.status).startswith('4') or str(response.status).startswith('5'):
-            # 随意封装，直接返回response，spider代码中根据url==''来处理response
             response = scrapy.http.HtmlResponse(url='')
             return response
-        # 其他状态码不处理
         return response
 
     def process_exception(self, request, exception, spider):
-        # 捕获几乎所有的异常
-        if isinstance(exception, self.ALL_EXCEPTIONS):
-            # 在日志中打印异常类型
-            print('Got exception: %s' % (exception))
-            # 随意封装一个response，返回给spider
+       
+        if isinstance(exception, self.ALL_EXCEPTIONS):   
+            print('Got exception: %s' % (exception))         
             response = scrapy.http.HtmlResponse(url='exception')
             return response
-        # 打印出未捕获到的异常,也就是超出我们预料的异常
         print('Not Contained Exception: %s' % exception)
 
 agents = [
@@ -124,7 +118,7 @@ class UserAgentmiddleware():
 class ProxyMiddleware():
     def __init__(self):
         self.proxy = None
-        self.PROXY_URL = 'http://webapi.http.zhimacangku.com/getip?num=1&type=1&pro=0&city=0&yys=0&port=1&pack=38903&ts=0&ys=0&cs=0&lb=1&sb=0&pb=4&mr=1&regions=140000,440000,500000'
+        self.PROXY_URL = '' #代理接口
         self.logger = logging.getLogger(__name__)
         self.i = 0
         self.p = ['123.156.180.62:4281', '122.245.254.36:4235', '182.34.197.64:4246', '122.7.227.74:4258', '115.214.206.203:4235', '113.231.198.14:4237', '123.153.171.97:4214', '123.133.202.134:4213', '60.185.151.186:4240', '112.245.188.99:4274', '123.186.228.97:2341', '183.156.243.105:4204', '115.237.93.247:5946', '115.226.244.23:4208', '115.226.227.97:4208', '113.238.96.237:4268', '60.187.48.168:4267', '125.121.132.73:4204', '119.119.207.95:4675', '124.94.202.214:1767']
@@ -142,7 +136,7 @@ class ProxyMiddleware():
                 ret = re.compile(r'请将(.*)设置为白名单')
                 ip = re.findall(ret, data)[0]
                 print(ip, type(ip))
-                white_ip = 'http://web.http.cnapi.cc/index/index/save_white?neek=60658&appkey=c76d3c1fddc89df92151a2cfb6388a5f&white=' + ip
+                white_ip = '' + ip　　#代理白名单接口
                 result = requests.get(white_ip, headers=headers)
                 if '保存成功' in result.text:
                     print('白名单保存成功')
@@ -152,7 +146,7 @@ class ProxyMiddleware():
                 ret = re.compile(r'请检测您现在的(.*)是否在套餐')
                 ip = re.findall(ret, data)[0]
                 print(ip, type(ip))
-                white_ip = 'http://web.http.cnapi.cc/index/index/save_white?neek=60658&appkey=c76d3c1fddc89df92151a2cfb6388a5f&white=' + ip
+                white_ip = '' + ip　　#代理白名单接口
                 result = requests.get(white_ip, headers=headers)
                 if '保存成功' in result.text:
                     print('白名单保存成功')
