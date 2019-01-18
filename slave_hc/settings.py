@@ -105,9 +105,8 @@ RETRY_TIMES = 4
 # SCHEDULER_QUEUE_CLASS = "scrapy_redis.queue.SpiderQueue"
 # SCHEDULER_PERSIST = True
 # SCHEDULER_FLUSH_ON_START = False
-# REDIS_URL = 'redis://Ubuntu:caonima@47.107.137.63:6379/10'
 # REDIS_URL = 'redis://127.0.0.1:6379'
-PROXY_URL = 'http://webapi.http.zhimacangku.com/getip?num=1&type=1&pro=0&city=0&yys=0&port=1&pack=38903&ts=0&ys=0&cs=0&lb=1&sb=0&pb=4&mr=1&regions=140000,440000,500000'
+PROXY_URL = ''  #这个是代理ip接口
 
 MONGO_URI = 'localhost'
 MONGO_DB = 'scrapy_hc'
